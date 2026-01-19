@@ -15,6 +15,9 @@ public class HTTPSample : MonoBehaviour
     }
     private void Update()
     {
+        // 这里使用倒序遍历的原因是我们在轮询过程中就可能进行remove操作
+        // 如果为正序，i=0时，元素被移除，此时原本索引为1的元素被移动到了0位置
+        // 而i=0的循环逻辑已经被执行过，原本为1的元素会被跳过
         for(int i = m_PendingRequests.Count - 1; i >= 0; i--)
         {
             m_PendingRequests[i].CheckPendingRequest();
@@ -84,5 +87,6 @@ public class HTTPSample : MonoBehaviour
         });
         //add to pending list
         m_PendingRequests.Add(request);
+        
     }
 }

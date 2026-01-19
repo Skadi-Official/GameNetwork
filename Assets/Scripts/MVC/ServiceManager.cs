@@ -5,7 +5,8 @@ using UnityEngine;
 
 public enum ERequestType
 {
-    Buy
+    Buy,
+    Sold
 }
 
 public class ServiceManager : MonoBehaviour

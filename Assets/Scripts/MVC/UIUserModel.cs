@@ -21,6 +21,7 @@ public class UIUserModel
     public enum EPropChangeType
     {
         Coin,
+        Gold
     }
 
     private readonly List<Action<EPropChangeType>> m_Observers = new List<Action<EPropChangeType>>();
@@ -45,6 +46,8 @@ public class UIUserModel
 
     public string Name { get; private set; } = "Finney";
     public int Coin { get; private set; } = 100;
+    
+    public int InventoryItemCount { get; private set; } = 0;
 
     public void RequestBuyItem(int price)
     {
@@ -63,7 +66,25 @@ public class UIUserModel
             //simulate buying item, in real project, you should update the Coin from server
             //and get coin from server response
             Coin -= price;
+            InventoryItemCount++;
             Notify(EPropChangeType.Coin);
         });
+    }
+
+    public void RequestSoldItem(int price)
+    {
+        if (InventoryItemCount <= 0) return;
+        ColoredLogger.Log("Waiting for RequestSoldItem from server");
+        ServiceManager.instance.SendRequest(ERequestType.Sold, price,
+            (result) =>
+            {
+                if (result == false)
+                {
+                    return;
+                }
+                InventoryItemCount--;
+                Coin += price;
+                Notify(EPropChangeType.Coin);
+            });
     }
 }

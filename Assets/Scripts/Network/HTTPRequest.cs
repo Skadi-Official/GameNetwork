@@ -32,6 +32,7 @@ namespace Network.HTTP
         }
         public void Get(string addr, string cmd, Action<bool, byte[]> onRequestFinished, params object[] args)
         {
+            // 参数是奇数，说明参数不符合Key Value格式，直接返回
             if (args.Length % 2 != 0)
             {
                 m_LastError = ERR_InvalidArguments;

@@ -9,7 +9,9 @@ public class UIShopController : MonoBehaviour
     {
         m_View = GetComponent<UIShopView>();
         m_View.Refresh(ItemPrice, UIUserModel.instance.Coin);
+        m_View.RefreshSellBtn(UIUserModel.instance.InventoryItemCount);
         m_View.BtnBuy.onClick.AddListener(OnBtnBuyClick);
+        m_View.BtnSell.onClick.AddListener(OnBtnSoldClick);
         UIUserModel.instance.AddObserver(OnCoinChanged);
     }
     private void OnDestroy()
@@ -21,10 +23,16 @@ public class UIShopController : MonoBehaviour
         if (type == UIUserModel.EPropChangeType.Coin)
         {
             m_View.Refresh(ItemPrice,UIUserModel.instance.Coin);
+            m_View.RefreshSellBtn(UIUserModel.instance.InventoryItemCount);
         }
     }
     private void OnBtnBuyClick()
     {
         UIUserModel.instance.RequestBuyItem(ItemPrice);
+    }
+
+    private void OnBtnSoldClick()
+    {
+        UIUserModel.instance.RequestSoldItem(ItemPrice);
     }
 }

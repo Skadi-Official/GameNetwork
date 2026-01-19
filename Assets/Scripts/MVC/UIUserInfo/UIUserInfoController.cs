@@ -9,10 +9,12 @@ public class UIUserInfoController : MonoBehaviour
         var userModel = UIUserModel.instance;
         m_View.Refresh(userModel.Name, userModel.Coin);
         userModel.AddObserver(OnCoinChanged);
+        userModel.AddObserver(OnChange);
     }
     private void OnDestroy()
     {
         UIUserModel.instance.RemoveObserver(OnCoinChanged);
+        UIUserModel.instance.RemoveObserver(OnChange);
     }
     private void OnCoinChanged(UIUserModel.EPropChangeType type)
     {
@@ -20,6 +22,15 @@ public class UIUserInfoController : MonoBehaviour
         {
             var userModel = UIUserModel.instance;
             m_View.Refresh(userModel.Name, userModel.Coin);
+            
+        }
+    }
+
+    private void OnChange(UIUserModel.EPropChangeType type)
+    {
+        if (type != UIUserModel.EPropChangeType.Gold)
+        {
+            Debug.Log(type);
         }
     }
 }
