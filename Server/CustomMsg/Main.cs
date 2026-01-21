@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Common;
@@ -40,6 +41,31 @@ namespace CustomMsg
                 Speed = reader.ReadSingle();
             }
         }
+        
+        public class AttackMsg : MsgBase
+        {
+            public int PlayerID;
+            public int TargetID;
+            public float Power;
+            public override byte[] Serialize()
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                var writer = new BinaryWriter(memoryStream);
+                writer.Write(PlayerID);
+                writer.Write(TargetID);
+                writer.Write(Power);
+                return memoryStream.ToArray();
+            }
+
+            public override void Unserialize(byte[] data)
+            {
+                MemoryStream memoryStream = new MemoryStream(data);
+                BinaryReader reader = new BinaryReader(memoryStream);
+                PlayerID = reader.ReadInt32();
+                TargetID = reader.ReadInt32();
+                Power = reader.ReadSingle();
+            }
+        }
         private static readonly byte[] KEY = new byte[] { 0x36, 0x7F, 0x45 };
         public static byte[] XOR(byte[] data)
         {
@@ -78,11 +104,13 @@ namespace CustomMsg
             while (m_RecvData.Count != 0)
             {
                 var packet = m_RecvData.Dequeue();
+                Logger.LogInfo(BitConverter.ToString(packet.Data).Replace("-", " "));
                 var data = MsgProto.XOR(packet.Data);
-                var msg = new MsgProto.MoveToMsg();
+                //var msg = new MsgProto.MoveToMsg();
+                var msg = new MsgProto.AttackMsg();
                 msg.Unserialize(data);
                 Logger.LogInfo(
-                    $"Msg From User({packet.ClientKey}): [PlayerID={msg.PlayerID},TargetPosition={msg.TargetPosition.ToString()},Speed={msg.Speed}]");
+                    $"Msg From User({packet.ClientKey}): [PlayerID={msg.PlayerID},TargetID={msg.TargetID},Power={msg.Power}]");
             }
             return true;
         }

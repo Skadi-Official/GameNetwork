@@ -36,6 +36,30 @@ class MsgProto
             Speed = reader.ReadSingle();
         }
     }
+    public class AttackMsg : MsgBase
+    {
+        public int PlayerID;
+        public int TargetID;
+        public float Power;
+        public override byte[] Serialize()
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            var writer = new BinaryWriter(memoryStream);
+            writer.Write(PlayerID);
+            writer.Write(TargetID);
+            writer.Write(Power);
+            return memoryStream.ToArray();
+        }
+
+        public override void Unserialize(byte[] data)
+        {
+            MemoryStream memoryStream = new MemoryStream(data);
+            BinaryReader reader = new BinaryReader(memoryStream);
+            PlayerID = reader.ReadInt32();
+            TargetID = reader.ReadInt32();
+            Power = reader.ReadSingle();
+        }
+    }
     private static readonly byte[] KEY = new byte[] { 0x36, 0x7F, 0x45 };
     public static byte[] XOR(byte[] data)
     {
