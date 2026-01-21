@@ -33,7 +33,9 @@ namespace Common
         {
             if (!m_HasInited)
             {
+                Logger.LogInfo("start init");
                 Init();
+                Logger.LogInfo("init finished");
                 m_HasInited = true;
             }
             

@@ -30,9 +30,13 @@ namespace UDPEchoNumber
             while (m_RecvData.Count != 0)
             {
                 var packet = m_RecvData.Dequeue();
-                var recvNumber = BitConverter.ToUInt32(packet.Data, 0);
-                m_UDPServer.SendToClient(packet.ClientKey, BitConverter.GetBytes(recvNumber));
-                Logger.LogInfo($"Msg From User({packet.ClientKey}): [{recvNumber}]");
+                var decryptedPacketData = XOREncrypt.XOR(packet.Data);
+                //var recvNumber = BitConverter.ToUInt32(packet.Data, 0);
+                var replyMsg = DateTime.Now.ToBinary().ToString();
+                var receivedMsg = Encoding.UTF8.GetString(decryptedPacketData);
+                //m_UDPServer.SendToClient(packet.ClientKey, BitConverter.GetBytes(recvNumber));
+                m_UDPServer.SendToClient(packet.ClientKey, Encoding.UTF8.GetBytes(replyMsg));
+                Logger.LogInfo($"Msg From User({packet.ClientKey}): [{receivedMsg}]");
             }
             return true;
         }
@@ -53,6 +57,19 @@ namespace UDPEchoNumber
         {
             var app = new UDPEchoNumberApp();
             app.Run();
+        }
+    }
+    
+    public static class XOREncrypt
+    {
+        private static readonly byte KEY = 0x59;
+        public static byte[] XOR(byte[] input)
+        {
+            for (int i = 0; i < input.Length; i++)
+            {
+                input[i] ^= KEY;
+            }
+            return input;
         }
     }
 }

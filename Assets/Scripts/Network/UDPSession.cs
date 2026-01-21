@@ -25,6 +25,7 @@ namespace Network.UDP
             try
             {
                 m_Socket = new UdpClient();
+                // 这里的connect方法是在固定目标地址和端口，后续调用 Send 不需要每次都指定远程 IP 和端口
                 m_Socket.Connect(m_Addr);
                 return true;
             }
@@ -157,7 +158,7 @@ namespace Network.UDP
                     while (dataToSend.Count != 0)
                     {
                         var data = dataToSend.Dequeue();
-                        if (data != null && data.Length > 0)
+                        if (data is { Length: > 0})
                         {
                             m_Socket.Send(data, data.Length);
                         }

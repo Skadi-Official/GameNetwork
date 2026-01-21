@@ -26,7 +26,7 @@ public class TCPEchoClient : MonoBehaviour
         msg += " Hello Server! This is a test message from client.";
         byte[] msgBody = Encoding.UTF8.GetBytes(msg);
         int bodyLen = msgBody.Length;
-        // GetByte(int) 总是返回四个字节
+        // GetByte(int) 总是返回四个字节，4 字节的二进制整数表示
         byte[] msgHead = BitConverter.GetBytes(bodyLen);
         byte[] packet = new byte[msgHead.Length + msgBody.Length];
         msgHead.CopyTo(packet, 0);
@@ -39,7 +39,7 @@ public class TCPEchoClient : MonoBehaviour
         }
         ColoredLogger.Log(msg);
         ColoredLogger.Log(sb.ToString(), ColoredLogger.LogColor.Green);
-
+        // 4字节长度头(int) + UTF8编码的字符串消息体
         return packet;
     }
 

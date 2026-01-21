@@ -46,7 +46,7 @@ namespace TCPEcho
                 }
                 int msgLen = BitConverter.ToInt32(m_Buffer.ToArray(), 0);
                 // 如果此时收到的数据还不完整则返回
-                if(m_Buffer.Count < msgLen + 4)
+                if(m_Buffer.Count < msgLen + 4)  
                 {
                     Logger.LogInfo("长度头解析完成，消息体不完整，等待更多数据");
                     return;
