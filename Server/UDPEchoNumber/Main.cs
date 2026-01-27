@@ -29,14 +29,25 @@ namespace UDPEchoNumber
             }
             while (m_RecvData.Count != 0)
             {
+                // var packet = m_RecvData.Dequeue();
+                // var decryptedPacketData = XOREncrypt.XOR(packet.Data);
+                // //var recvNumber = BitConverter.ToUInt32(packet.Data, 0);
+                // var replyMsg = DateTime.Now.ToBinary().ToString();
+                // var receivedMsg = Encoding.UTF8.GetString(decryptedPacketData);
+                // //m_UDPServer.SendToClient(packet.ClientKey, BitConverter.GetBytes(recvNumber));
+                // m_UDPServer.SendToClient(packet.ClientKey, Encoding.UTF8.GetBytes(receivedMsg));
+                // Logger.LogInfo($"Msg From User({packet.ClientKey}): [{receivedMsg}]");
+                // 假设这是服务器接收循环内部
                 var packet = m_RecvData.Dequeue();
-                var decryptedPacketData = XOREncrypt.XOR(packet.Data);
-                //var recvNumber = BitConverter.ToUInt32(packet.Data, 0);
-                var replyMsg = DateTime.Now.ToBinary().ToString();
-                var receivedMsg = Encoding.UTF8.GetString(decryptedPacketData);
-                //m_UDPServer.SendToClient(packet.ClientKey, BitConverter.GetBytes(recvNumber));
-                m_UDPServer.SendToClient(packet.ClientKey, Encoding.UTF8.GetBytes(replyMsg));
-                Logger.LogInfo($"Msg From User({packet.ClientKey}): [{receivedMsg}]");
+
+                // 1. 解密客户端发来的数据
+                var decryptedData = XOREncrypt.XOR(packet.Data);
+
+                // 2. 将内容转回字符串打印（可选）
+                var receivedMsg = Encoding.UTF8.GetString(decryptedData);
+                m_UDPServer.SendToClient(packet.ClientKey, Encoding.UTF8.GetBytes(receivedMsg));
+                var LongResult = long.Parse(receivedMsg);
+                Logger.LogInfo($"[Server] ({packet.ClientKey}): [{DateTime.FromBinary(LongResult):HH:mm:ss.fff}]");
             }
             return true;
         }

@@ -18,8 +18,8 @@ namespace MyNetwork.UDP
         private Queue<byte[]> m_PendingSendData; // 存放需要被发送的消息
         private Queue<byte[]> m_ReceivedData; // 存放已经接收到的消息
         private CancellationTokenSource m_cts; // 控制是否取消线程的执行
+        public string ClientKey => m_ClientKey;
         private string m_ClientKey; // 
-
         #region 重写的生命周期方法
 
         protected override bool OnInit()
@@ -122,6 +122,12 @@ namespace MyNetwork.UDP
                     {
                         m_ReceivedData.Enqueue(data);
                     }
+                    do
+                    {
+                        if (IsClosed()) return;
+                        Thread.Sleep(10);
+                    }
+                    while (m_Socket == null || m_Socket.Available <= 0);
                 }
                 catch (Exception e)
                 {

@@ -24,9 +24,19 @@ public class MyUDPEchoClient : MonoBehaviour
         int margin = (int)(Mathf.Min(Screen.width, Screen.height) * 0.25f);
         if (GUI.Button(new Rect(margin, margin, Screen.width - 2 * margin, Screen.height - 2 * margin), "Say Hello"))
         {
-            const string msg = "Hello, Server!This is a test message from client";
-            m_ClientSession.Send(XOREncrypt.XOR(Encoding.ASCII.GetBytes(msg)));
-            ColoredLogger.Log(msg, ColoredLogger.LogColor.Green);
+            // const string msg = "Hello, Server!This is a test message from client";
+            // m_ClientSession.Send(XOREncrypt.XOR(Encoding.ASCII.GetBytes(msg)));
+            // ColoredLogger.Log(msg, ColoredLogger.LogColor.Green);
+            // 1. 获取当前时间戳的 Binary 形式，转为字符串
+            string timestampStr = DateTime.Now.ToBinary().ToString();
+            var LongResult = long.Parse(timestampStr);
+            // 2. 转为字节流
+            byte[] rawData = Encoding.UTF8.GetBytes(timestampStr);
+        
+            // 3. 加密并发送
+            m_ClientSession.Send(XOREncrypt.XOR(rawData));
+        
+            Debug.Log($"客户端发出:{DateTime.FromBinary(LongResult):HH:mm:ss.fff}");
         }
     }
 
@@ -45,8 +55,7 @@ public class MyUDPEchoClient : MonoBehaviour
                 DateTime receiveTime = DateTime.Now;
                 // 计算差值
                 TimeSpan delay = receiveTime - DateTime.FromBinary(LongResult);
-                Debug.Log($"服务器发送时间: {DateTime.FromBinary(LongResult):HH:mm:ss.fff}");
-                Debug.Log($"客户端接收时间: {receiveTime:HH:mm:ss.fff}");
+                Debug.Log($"客户端收到回传: {receiveTime:HH:mm:ss.fff}");
                 Debug.Log($"延迟时间: {delay.TotalMilliseconds} 毫秒");
                 
             }
