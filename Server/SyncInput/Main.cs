@@ -5,11 +5,14 @@ namespace SyncInput
 {
     internal class SyncInputApp : AppBase
     {
+        // private MyUDPSession m_UDPServer;
         private UDPSession m_UDPServer;
         private readonly Queue<UDPSession.UDPPacket> m_RecvData = new Queue<UDPSession.UDPPacket>();
         
         private readonly InputMsg m_ClientInput = new InputMsg();
+        // 保存所有的输入消息
         private readonly FrameClientInputsMsg m_FrameClientInputs = new FrameClientInputsMsg();
+        // 处理输入消息的字典，用来给m_FrameClientInputs提供数据
         private readonly Dictionary<string, FrameClientInputsMsg.ClientInputData> m_CachedClientInputs = new Dictionary<string, FrameClientInputsMsg.ClientInputData>();
         
         private int m_FrameCount = 0;
@@ -35,8 +38,10 @@ namespace SyncInput
             //handle client input
             while (m_RecvData.Count != 0)
             {
-                var packet = m_RecvData.Dequeue();
+                // 1.取出所有的网络包
+                UDPSession.UDPPacket packet = m_RecvData.Dequeue();
                 m_ClientInput.Unserialize(packet.Data);
+                // 2.根据key查找字典中对应的用户
                 if(!m_CachedClientInputs.TryGetValue(packet.ClientKey, out var clientInput))
                 {
                     clientInput = new FrameClientInputsMsg.ClientInputData()
@@ -45,20 +50,24 @@ namespace SyncInput
                     };
                     m_CachedClientInputs[packet.ClientKey] = clientInput;
                 }
+                // 3.将对应用户的数据更新
                 clientInput.X = m_ClientInput.X;
                 clientInput.Y = m_ClientInput.Y;
             }
             
             //construct frame message and push it to client
+            // 4.推进逻辑帧并在要发送的数据中记录当前逻辑帧
             m_FrameCount++;
             m_FrameClientInputs.FrameCount = m_FrameCount;
             foreach (var pair in m_CachedClientInputs)
             {
+                // 5.将处理好的用户输入数据加入要发送的数据中
                 m_FrameClientInputs.ClientInputs.Add(pair.Value);
             }
             m_UDPServer.BroadcastToClients(m_FrameClientInputs.Serialize());
             
             //clear last inputs
+            // 6.发送完成后全部清空
             m_CachedClientInputs.Clear();
             m_FrameClientInputs.ClientInputs.Clear();
             return true;

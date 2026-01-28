@@ -74,7 +74,10 @@ public class SyncStateSampleClient : MonoBehaviour
                     obj.TargetRot = Quaternion.LookRotation(msg.TargetForward);
                     obj.StartPos = obj.ObjectTF.position;
                     obj.StartRot = obj.ObjectTF.rotation;
+                    // 此时 obj.LastTimeStamp 是第一个包的时间，msg.TimeStamp 是第二个包的
+                    // 加上 Mathf.Max(obj.TotalTime - obj.SimTime, 0f) 是为了补偿，如果上一个包没走完，会把剩余时间考虑进去 
                     obj.TotalTime = Mathf.Max(obj.TotalTime - obj.SimTime, 0f) + msg.TimeStamp - obj.LastTimeStamp;
+                    // 如果totalTime过高则说明和服务器差距过大，不考虑补偿，直接追赶
                     if (obj.TotalTime > 1f)
                     {
                         obj.TotalTime = msg.TimeStamp - obj.LastTimeStamp;
@@ -127,6 +130,7 @@ public class SyncStateSampleClient : MonoBehaviour
             msg.Dir.z = -1;
         }
         msg.Dir = Camera.main.transform.TransformDirection(msg.Dir);
+        // 转换后要y轴清理并且归一化
         msg.Dir.y = 0;
         msg.Dir.Normalize();
         m_ClientSession.Send(msg.Serialize());
@@ -134,6 +138,7 @@ public class SyncStateSampleClient : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        Debug.Log("SyncStateSampleClient OnApplicationQuit");
         if (m_ClientSession != null)
         {
             m_ClientSession.Close();

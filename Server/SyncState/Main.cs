@@ -45,7 +45,7 @@ namespace SyncState
                     };
                     m_UDPServer.BroadcastToClients(msg.Serialize());   
                 }
-                m_NextSyncTime = curTimestamp + 0.2f;
+                m_NextSyncTime = curTimestamp + 0.05f;
             }
         }
         protected override void OnInit()

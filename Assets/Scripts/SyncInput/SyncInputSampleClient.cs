@@ -64,6 +64,7 @@ public class SyncInputSampleClient : MonoBehaviour
             {
                 var msg = new FrameClientInputsMsg();
                 msg.Unserialize(m_ClientRecvedData.Dequeue());
+                Debug.Log(msg.FrameCount);
                 if (m_CurFrameCount >= msg.FrameCount)
                 {
                     continue;
@@ -118,9 +119,11 @@ public class SyncInputSampleClient : MonoBehaviour
         dir = Camera.main.transform.TransformDirection(dir);
         dir.y = 0;
         dir.Normalize();
-        var inputMsg = new InputMsg();
-        inputMsg.X = (int)(dir.x * 1000);
-        inputMsg.Y = (int)(dir.z * 1000);
+        var inputMsg = new InputMsg
+        {
+            X = (int)(dir.x * 1000),
+            Y = (int)(dir.z * 1000)
+        };
         m_ClientSession.Send(inputMsg.Serialize());
     }
     
