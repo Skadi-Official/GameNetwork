@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{ad24e748-6a8f-d1e3-fd7b-b3893e980a67}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParrelSync", "ParrelSync.csproj", "{43b02003-1ecb-2dfd-a97a-76ddb7060781}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,6 +12,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{ad24e748-6a8f-d1e3-fd7b-b3893e980a67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ad24e748-6a8f-d1e3-fd7b-b3893e980a67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43b02003-1ecb-2dfd-a97a-76ddb7060781}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43b02003-1ecb-2dfd-a97a-76ddb7060781}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

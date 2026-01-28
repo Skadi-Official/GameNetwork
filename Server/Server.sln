@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncState2", "SyncState2\Sy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncInput", "SyncInput\SyncInput.csproj", "{C27E74E8-9802-48F9-8C08-53CE0186A676}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncInputWithoutFixedNumber", "SyncInputWithoutFixedNumber\SyncInputWithoutFixedNumber.csproj", "{FCF249DC-94F6-4664-AA4E-32EC9E8F4E96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,5 +68,9 @@ Global
 		{C27E74E8-9802-48F9-8C08-53CE0186A676}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C27E74E8-9802-48F9-8C08-53CE0186A676}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C27E74E8-9802-48F9-8C08-53CE0186A676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCF249DC-94F6-4664-AA4E-32EC9E8F4E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCF249DC-94F6-4664-AA4E-32EC9E8F4E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCF249DC-94F6-4664-AA4E-32EC9E8F4E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCF249DC-94F6-4664-AA4E-32EC9E8F4E96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

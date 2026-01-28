@@ -1,0 +1,16 @@
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\bin\Debug\net9.0\SyncInputWithoutFixedNumber.exe
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\bin\Debug\net9.0\SyncInputWithoutFixedNumber.deps.json
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\bin\Debug\net9.0\SyncInputWithoutFixedNumber.runtimeconfig.json
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\bin\Debug\net9.0\SyncInputWithoutFixedNumber.dll
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\bin\Debug\net9.0\SyncInputWithoutFixedNumber.pdb
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.GeneratedMSBuildEditorConfig.editorconfig
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.AssemblyInfoInputs.cache
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.AssemblyInfo.cs
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.csproj.CoreCompileInputs.cache
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.sourcelink.json
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.dll
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\refint\SyncInputWithoutFixedNumber.dll
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.pdb
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.genruntimeconfig.cache
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\ref\SyncInputWithoutFixedNumber.dll
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.csproj.AssemblyReference.cache
