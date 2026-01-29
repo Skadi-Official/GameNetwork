@@ -14,3 +14,6 @@ D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\
 D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.genruntimeconfig.cache
 D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\ref\SyncInputWithoutFixedNumber.dll
 D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInputWithoutFixedNumber.csproj.AssemblyReference.cache
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\bin\Debug\net9.0\Common.dll
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\bin\Debug\net9.0\Common.pdb
+D:\UnityProject\GameNetwork\Server\SyncInputWithoutFixedNumber\obj\Debug\net9.0\SyncInpu.99D8BA52.Up2Date
