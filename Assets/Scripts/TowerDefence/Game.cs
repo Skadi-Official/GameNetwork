@@ -10,6 +10,7 @@ namespace TowerDefence
         [SerializeField] private Vector2Int boardSize = new Vector2Int(11, 11);
         [SerializeField] private GameBoard board;
         [SerializeField] private GameTileContentFactory tileContentFactory;
+        private Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
         private void Awake()
         {
             board.Init(boardSize);
@@ -19,6 +20,21 @@ namespace TowerDefence
         {
             if(boardSize.x < 2) boardSize.x = 2;
             if(boardSize.y < 2) boardSize.y = 2;
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                HandleTouch();
+            }
+        }
+
+        private void HandleTouch()
+        {
+            var tile = board.GetTile(TouchRay);
+            if(tile == null) return;
+            tile.Content = tileContentFactory.Get(GameTileContentType.Destination);
         }
     }
 }

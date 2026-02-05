@@ -6,13 +6,32 @@ using UnityEngine.Serialization;
 
 namespace TowerDefence
 {
+    /// <summary>
+    /// 组成棋盘的基本网格
+    /// </summary>
     public class GameTile : MonoBehaviour
     {
         [SerializeField] private Transform arrow;
         [SerializeField] private GameTile northTile, southTile, eastTile, westTile;
         [SerializeField] private GameTile nextOnPath; // 走到该网格后下一格该走哪里
         [SerializeField] private int distance; // 离目的地的最短距离
+        private GameTileContent m_Content;
         public bool IsAlternative { get; set; }
+
+        public GameTileContent Content
+        {
+            get => m_Content;
+            set
+            {
+                Debug.Assert(value != null, "不能将 null 赋值给 content！");
+                if (m_Content != null)
+                {
+                    m_Content.Recycle();
+                }
+                m_Content = value;
+                m_Content.transform.localPosition = transform.localPosition;
+            }
+        }
         #region 提供给箭头的旋转角度
 
         private static readonly Quaternion 

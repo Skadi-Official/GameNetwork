@@ -46,6 +46,19 @@ namespace TowerDefence
             FindPath();
         }
 
+        public GameTile GetTile(Ray ray)
+        {
+            if (!Physics.Raycast(ray, out var hit)) return null;
+            
+            var x = (int)(hit.point.x + m_Size.x * 0.5f);
+            var y = (int)(hit.point.z + m_Size.y * 0.5f);
+            if (x >= 0 && x <= m_Size.x && y >= 0 && y <= m_Size.y)
+            {
+                return m_Tiles[x + y * m_Size.x];
+            }
+            return null;
+        }
+        
         #region 寻路算法实现
 
         private void FindPath()

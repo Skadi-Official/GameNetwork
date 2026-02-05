@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace TowerDefence
 {
+    /// <summary>
+    /// 用于定义和标识格子上的具体内容
+    /// </summary>
     public class GameTileContent : MonoBehaviour
     {
         [SerializeField] private GameTileContentType type;
@@ -23,6 +26,9 @@ namespace TowerDefence
 
         #region 工厂相关逻辑
 
+        /// <summary>
+        /// 回收当前对象
+        /// </summary>
         public void Recycle()
         {
             m_OriginFactory.Reclaim(this);
