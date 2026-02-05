@@ -9,7 +9,7 @@ namespace TowerDefence
     {
         [SerializeField] private Vector2Int boardSize = new Vector2Int(11, 11);
         [SerializeField] private GameBoard board;
-        
+        [SerializeField] private GameTileContentFactory tileContentFactory;
         private void Awake()
         {
             board.Init(boardSize);
