@@ -74,10 +74,27 @@ namespace TowerDefence
                     FindPath();
                 }
             }
-            else
+            else if(tile.Content.Type == GameTileContentType.Empty)
             {
                 tile.Content = m_TileContentFactory.Get(GameTileContentType.Destination);
                 FindPath();
+            }
+        }
+
+        public void ToggleWall(GameTile tile)
+        {
+            if (tile.Content.Type == GameTileContentType.Wall)
+            {
+                tile.Content = m_TileContentFactory.Get(GameTileContentType.Empty);
+                FindPath();
+            }
+            else if (tile.Content.Type == GameTileContentType.Empty)
+            {
+                tile.Content = m_TileContentFactory.Get(GameTileContentType.Wall);
+                if (!FindPath())
+                {
+                    tile.Content = m_TileContentFactory.Get(GameTileContentType.Empty);
+                }
             }
         }
         
@@ -121,6 +138,14 @@ namespace TowerDefence
                 }
             }
 
+            foreach (var tile in m_Tiles)
+            {
+                if (!tile.HasPath)
+                {
+                    return false;
+                }
+            }
+            
             foreach (var tile in m_Tiles)
             {
                 tile.ShowPath();

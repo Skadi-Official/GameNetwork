@@ -28,8 +28,19 @@ namespace TowerDefence
             {
                 HandleTouch();
             }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                HandleAlternativeTouch();
+            }
         }
 
+        private void HandleAlternativeTouch()
+        {
+            var tile = board.GetTile(TouchRay);
+            if(tile == null) return;
+            board.ToggleWall(tile);
+        }
+        
         private void HandleTouch()
         {
             var tile = board.GetTile(TouchRay);

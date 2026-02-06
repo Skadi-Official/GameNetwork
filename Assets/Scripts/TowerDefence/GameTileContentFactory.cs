@@ -10,6 +10,7 @@ namespace TowerDefence
     {
         [SerializeField] private GameTileContent destinationPrefab = null;
         [SerializeField] private GameTileContent emptyPrefab = null;
+        [SerializeField] private GameTileContent wallPrefab = null;
         private Scene m_ContentScene;       // 工厂实例化的对象需要放入的场景
         /// <summary>
         /// 回收一个GameTileContent实例
@@ -37,6 +38,7 @@ namespace TowerDefence
             switch (type) {
                 case GameTileContentType.Destination: return Get(destinationPrefab);
                 case GameTileContentType.Empty: return Get(emptyPrefab);
+                case GameTileContentType.Wall: return Get(wallPrefab);
             }
             Debug.Assert(false, "Unsupported type: " + type);
             return null;
