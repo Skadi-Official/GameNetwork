@@ -13,7 +13,7 @@ namespace TowerDefence
         private Ray TouchRay => Camera.main.ScreenPointToRay(Input.mousePosition);
         private void Awake()
         {
-            board.Init(boardSize);
+            board.Initialize(boardSize, tileContentFactory);
         }
 
         private void OnValidate()
@@ -34,7 +34,7 @@ namespace TowerDefence
         {
             var tile = board.GetTile(TouchRay);
             if(tile == null) return;
-            tile.Content = tileContentFactory.Get(GameTileContentType.Destination);
+            board.ToggleDestination(tile);
         }
     }
 }
