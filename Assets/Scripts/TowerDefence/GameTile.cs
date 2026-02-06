@@ -13,7 +13,10 @@ namespace TowerDefence
     {
         [SerializeField] private Transform arrow;
         [SerializeField] private GameTile northTile, southTile, eastTile, westTile;
-        [SerializeField] private GameTile nextOnPath; // 走到该网格后下一格该走哪里
+        /// <summary>
+        /// 要到终点的话走到该网格后下一格该走哪里
+        /// </summary>
+        [SerializeField] private GameTile nextOnPath;
         [SerializeField] private int distance; // 离目的地的最短距离
         private GameTileContent m_Content;
         public bool IsAlternative { get; set; }

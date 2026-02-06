@@ -5,14 +5,19 @@ using UnityEngine;
 namespace TowerDefence
 {
     /// <summary>
-    /// 用于定义和标识格子上的具体内容
+    /// 用于定义和标识格子的具体内容
     /// </summary>
     public class GameTileContent : MonoBehaviour
     {
         [SerializeField] private GameTileContentType type;
         private GameTileContentFactory m_OriginFactory;
+        /// <summary>
+        /// 格子所属的类型
+        /// </summary>
         public GameTileContentType Type => type;
-
+        /// <summary>
+        /// 创建格子的源工厂
+        /// </summary>
         public GameTileContentFactory OriginFactory
         {
             get => m_OriginFactory;
